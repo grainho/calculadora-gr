@@ -9,81 +9,86 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Calculadora</title>
+    <style>
+             
+        tr{margin:0px; padding:0px;}
+        td {margin: 0px; padding:0px;}
+    </style>
 </head>
 <body>
-    <div>
+    <div align="center">
         <h1 style="color:red">Calculadora + completa</h1>
         <!-- este objeto envia os dados do formulario para o servidor -->
         <!-- este comentario aparece no cliente (browser) -->
         @* mas este cometario ja nao aparece... *@
         <form method="post">
 
-            <table border="1">
+            <table>
                 <tr>
                     <td colspan="5">
-                        <input type="text" name="visor" value="@ViewBag.Visor" readonly />
+                        <input type="text" style="font-size:50px; width:405px; height:60px; text-align:right" name="visor" value="@ViewBag.Visor" readonly />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit" value="7" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="7" name="bt" />
                     </td>
                     <td>
-                        <input type="submit" value="8" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="8" name="bt" />
                     </td>
                     <td>
-                        <input type="submit" value="9" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="9" name="bt" />
                     </td>
                     <td>
-                        <input type="submit" value=":" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value=":" name="bt" />
                     </td>
                     <td>
-                        <input type="submit" value="+/-" name="bt" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" value="4" name="bt" />
-                    </td>
-                    <td>
-                        <input type="submit" value="5" name="bt" />
-                    </td>
-                    <td>
-                        <input type="submit" value="6" name="bt" />
-                    </td>
-                    <td>
-                        <input type="submit" value="*" name="bt" />
-                    </td>
-                    <td>
-                        <input type="submit" value="C" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="+/-" name="bt" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit" value="1" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="4" name="bt" />
                     </td>
                     <td>
-                        <input type="submit" value="2" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="5" name="bt" />
                     </td>
                     <td>
-                        <input type="submit" value="3" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="6" name="bt" />
                     </td>
                     <td>
-                        <input type="submit" value="-" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="x" name="bt" />
+                    </td>
+                    <td>
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="C" name="bt" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="1" name="bt" />
+                    </td>
+                    <td>
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="2" name="bt" />
+                    </td>
+                    <td>
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="3" name="bt" />
+                    </td>
+                    <td>
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="-" name="bt" />
                     </td>
                     <td rowspan="2">
-                        <input type="submit" value="=" name="bt" />
+                        <input style= "font-size:50px; width:80px; height:162px;" type="submit" value="=" name="bt" />
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="submit" value="0" name="bt" />
+                        <input style="font-size:50px; width:162px; height:80px;" type="submit" value="0" name="bt" />
                     </td>
                     <td>
-                        <input type="submit" value="," name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="," name="bt" />
                     </td>
                     <td>
-                        <input type="submit" value="+" name="bt" />
+                        <input style="font-size:50px; width:80px; height:80px;" type="submit" value="+" name="bt" />
                     </td>
                 </tr>
 

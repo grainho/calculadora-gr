@@ -45,9 +45,35 @@ namespace CalculadoraCompleta.Controllers
                     break;
 
                 case "+/-":
-                    bool res = int.TryParse(visor, out op1);
+                    string pInt = "";
+                    string pDec = "";
+                    int i = 0;
+                    while (!(visor[i] == ',') && i<visor.Length )
+                    {
+                        pInt += visor[i];
+                        i++;
+                    }
+                    while(i < visor.Length )
+                    {
+                        pDec += visor[i];
+                        i++;
+                    }
+
+                    bool res = int.TryParse(pInt, out op1);
                     op1 = op1 * (-1);
                     visor = op1.ToString();
+                    visor += pDec;
+                    break;
+
+                case ",":
+                    bool existe = false;
+
+                    for (int j = 0; j < visor.Length; j++)
+                        if (visor[j] == ',') existe = true;
+
+                    if (!existe) visor += bt;  
+
+
                     break;
 
             }

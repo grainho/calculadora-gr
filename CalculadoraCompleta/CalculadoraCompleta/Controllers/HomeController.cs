@@ -38,6 +38,10 @@ namespace CalculadoraCompleta.Controllers
 
                 
                     break;
+                case "0":
+                    if (!visor.Equals("0")) visor += bt;
+                    break;
+                
 
             }
             // enviar resposta para o cliente

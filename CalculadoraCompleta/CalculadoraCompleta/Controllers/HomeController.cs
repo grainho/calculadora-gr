@@ -21,6 +21,7 @@ namespace CalculadoraCompleta.Controllers
         [HttpPost]
         public ActionResult Index(string bt, string visor)
         {
+            int op1;
             //identificar o valor da variavel 'bt'
             switch (bt)
             {
@@ -38,10 +39,16 @@ namespace CalculadoraCompleta.Controllers
 
                 
                     break;
+
                 case "0":
                     if (!visor.Equals("0")) visor += bt;
                     break;
-                
+
+                case "+/-":
+                    bool res = int.TryParse(visor, out op1);
+                    op1 = op1 * (-1);
+                    visor = op1.ToString();
+                    break;
 
             }
             // enviar resposta para o cliente

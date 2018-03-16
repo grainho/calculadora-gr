@@ -8,12 +8,20 @@ namespace CalculadoraCompleta.Controllers
 {
     public class HomeController : Controller
     {
+        //nao funciona
+        //public bool primeiroOperador = true;
+
         // GET: Home
         [HttpGet] //esta anotaçao é facultativa pois eh isto q acontece por defeito
         public ActionResult Index()
         {
             //inicializar o valor do visor 
             ViewBag.Visor = 0;
+            // inicializar variaveis de formatação da calculadora 
+            Session["primeiroOperador"] = true;
+            //marcar o visor para limpeza
+            Session["limpaVisor"] = true;
+
             return View();
         }
 
@@ -21,7 +29,7 @@ namespace CalculadoraCompleta.Controllers
         [HttpPost]
         public ActionResult Index(string bt, string visor)
         {
-            int op1;
+            
             //identificar o valor da variavel 'bt'
             switch (bt)
             {
@@ -34,49 +42,97 @@ namespace CalculadoraCompleta.Controllers
                 case "7":
                 case "8":
                 case "9":
-                    if (visor.Equals("0")) visor = bt;
+                case "0":
+                    if ((bool)Session["limpaVisor"] || visor.Equals("0")) visor = bt;
                     else visor += bt;
 
-                
+                    //impedir o visor de ser limpo
+                    Session["limpaVisor"] = false;
+
+
+
                     break;
 
-                case "0":
-                    if (!visor.Equals("0")) visor += bt;
-                    break;
+                
+                   
 
                 case "+/-":
-                    string pInt = "";
-                    string pDec = "";
-                    int i = 0;
-                    while (!(visor[i] == ',') && i<visor.Length )
-                    {
-                        pInt += visor[i];
-                        i++;
-                    }
-                    while(i < visor.Length )
-                    {
-                        pDec += visor[i];
-                        i++;
-                    }
-
-                    bool res = int.TryParse(pInt, out op1);
-                    op1 = op1 * (-1);
-                    visor = op1.ToString();
-                    visor += pDec;
+                    visor = Convert.ToDouble(visor) * -1 + "";
                     break;
 
                 case ",":
-                    bool existe = false;
-
-                    for (int j = 0; j < visor.Length; j++)
-                        if (visor[j] == ',') existe = true;
-
-                    if (!existe) visor += bt;  
 
 
+                    if (!visor.Contains(","))
+                        visor += bt;
                     break;
 
-            }
+                case "+":
+                case "-":
+                case "x":
+                case ":":
+                case "=":
+                    //executar se NAO é a primeira vez que escolho um operador
+                    if (!(bool)Session["primeiroOperador"]) {
+                        
+                    
+                    
+                        
+
+
+                        //vars auxiliares
+                        double operando1 = Convert.ToDouble((string)Session["operando"]);
+                        double operando2 = Convert.ToDouble(visor);
+
+                        switch ((string)Session["operadorAnterior"])
+                        {
+                            case "+":
+                                visor = operando1 + operando2 + "";
+                                
+                                
+                                break;
+                            case "-":
+                                visor = operando1 - operando2 + "";
+                                
+                                
+                                break;
+                            case "x":
+                                visor = operando1 * operando2 + "";
+                                
+                               
+                                break;
+                            case ":":
+                                visor = operando1 / operando2 + "";
+                                
+                                
+                                break;
+                        }
+                        
+
+                    }
+                    Session["primeiroOperador"] = false;
+                    Session["operadorAnterior"] = bt;
+                    //guardar o valor do operando para utilização futura
+                    Session["operando"] = visor;
+                    //marcar o visor para limpeza
+                    Session["limpaVisor"] = true;
+
+                    //tratar da situação do operador "="
+                    if (bt.Equals("="))
+                    {
+                        Session["primeiroOperador"] = true;
+                    }
+                    break;
+                case "C":
+                    //limpa visor
+                    visor = "0";
+                    //reiniciar variaveis de formatação da calculadora 
+                    Session["primeiroOperador"] = true;
+                    //reiniciar o visor para limpeza
+                    Session["limpaVisor"] = true;
+                    break;
+            } //switch (bt)
+
             // enviar resposta para o cliente
             ViewBag.Visor = visor;
             return View();
